@@ -1,9 +1,13 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "metadata":{
+        "comments": "This playbook will take each IP entity and query VirusTotal for Ip Address Report (https://developers.virustotal.com/reference#ip-address-report).  You will need to register to thier community for an API key.",
+        "author": "Yehuda Tognder"
+    },
     "parameters": {
         "PlaybookName":{
-            "defaultValue": "PlaybookName",
+            "defaultValue": "GetIp-Report",
              "type": "String"
         },
         "UserName":{
@@ -23,8 +27,8 @@
         {
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "name": "[parameters('workflows_VirusTotalDev_name')]",
-            "location": "brazilsouth",
+            "name": "[parameters('PlaybookName')]",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "state": "Enabled",
                 "definition": {
